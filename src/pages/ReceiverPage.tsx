@@ -1,14 +1,26 @@
-import { ChevronDown, ChevronUp, MapPinned } from "lucide-react";
+import { ChevronDown, ChevronUp, MapPinned, Trash2 } from "lucide-react";
 import { useState } from "react";
 import { useGetLocations } from "../hooks/useGetLocations";
 import MultiMap from "../components/MultiMap";
 
+async function removeLocation(deviceId: string) {
+  await fetch(`/api/remove-location/${deviceId}`, { method: "DELETE" });
+}
+
 export const ReceiverPage = () => {
   const [expanded, setExpanded] = useState<number | null>(null);
   const { locations, fetchLocations, loading } = useGetLocations();
+  const [removing, setRemoving] = useState<string | null>(null);
 
   const handleGetLocations = () => {
     fetchLocations();
+  };
+
+  const handleRemove = async (deviceId: string) => {
+    setRemoving(deviceId);
+    await removeLocation(deviceId);
+    await fetchLocations();
+    setRemoving(null);
   };
 
   const toggleExpand = (idx: number) => {
@@ -40,6 +52,17 @@ export const ReceiverPage = () => {
                 <div className="flex justify-around items-center w-full">
                   <div className="font-bold">{loc.deviceId}</div>
                   <div className="text-sm">{new Date(loc.timestamp).toLocaleString("fr-FR")}</div>
+                  <button
+                    className="ml-4 text-red-500 hover:text-red-700"
+                    title="Supprimer"
+                    onClick={e => {
+                      e.stopPropagation();
+                      handleRemove(loc.deviceId);
+                    }}
+                    disabled={removing === loc.deviceId}
+                  >
+                    <Trash2 size={18} />
+                  </button>
                 </div>
               </div>
               {expanded === idx && (
