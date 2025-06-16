@@ -1,7 +1,7 @@
 import { useCallback, useRef, useState } from 'react';
 import axios from 'axios';
 
-export function useSendLocation(deviceId: string, intervalSec = 10) {
+export function useSendLocation(deviceId: string, intervalSec = 20) {
   const intervalRef = useRef<number | null>(null);
   const [error, setError] = useState<string | null>(null);
 
