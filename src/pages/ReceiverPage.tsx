@@ -1,6 +1,7 @@
 import { ChevronDown, ChevronUp, MapPinned } from "lucide-react";
 import { useState } from "react";
 import { useGetLocations } from "../hooks/useGetLocations";
+import MultiMap from "../components/MultiMap";
 
 export const ReceiverPage = () => {
   const [expanded, setExpanded] = useState<number | null>(null);
@@ -55,6 +56,21 @@ export const ReceiverPage = () => {
           ))}
           {locations?.length === 0 && !loading && (
             <div className="text-gray-400 text-center mt-4">Aucune position reçue.</div>
+          )}
+        </div>
+
+        <div>
+          {locations && locations.length > 0 && (
+            <div className="mt-6">
+              <MultiMap
+                points={locations.map((loc: any, idx: number) => ({
+                  id: loc.deviceId || String(idx),
+                  name: loc.deviceId || `Device ${idx + 1}`,
+                  lat: loc.latitude,
+                  lng: loc.longitude,
+                }))}
+              />
+            </div>
           )}
         </div>
       </section>
