@@ -1,9 +1,8 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useRef } from 'react';
 import axios from 'axios';
 
 export function useSendLocation(deviceId: string, intervalSec = 20) {
   const intervalRef = useRef<number | null>(null);
-  const [error, setError] = useState<string | null>(null);
 
   const send = useCallback(async () => {
     try {
@@ -23,13 +22,7 @@ export function useSendLocation(deviceId: string, intervalSec = 20) {
       console.log(payload);
       await axios.post('https://grpc-server-fliz.onrender.com/locations', payload);
       console.log('Position envoyée');
-      setError(null);
     } catch (err: any) {
-      if (err.response?.status === 409) {
-        setError('Le nom du device existe déjà.');
-      } else {
-        setError('Erreur envoi position.');
-      }
       console.error('Erreur envoi position:', err);
     }
   }, [deviceId]);
@@ -48,5 +41,5 @@ export function useSendLocation(deviceId: string, intervalSec = 20) {
     }
   }, []);
 
-  return { stop, start, error };
+  return { stop, start};
 }
