@@ -4,7 +4,7 @@ import { useGetLocations } from "../hooks/useGetLocations";
 import MultiMap from "../components/MultiMap";
 
 async function removeLocation(deviceId: string) {
-  await fetch(`/api/remove-location/${deviceId}`, { method: "DELETE" });
+  await fetch(`https://grpc-server-fliz.onrender.com/locations/${deviceId}`, { method: "DELETE" });
 }
 
 export const ReceiverPage = () => {
