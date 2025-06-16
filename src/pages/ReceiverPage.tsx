@@ -39,7 +39,7 @@ export const ReceiverPage = () => {
                 {expanded === idx ? <ChevronDown /> : <ChevronUp />}
                 <div className="flex justify-around items-center w-full">
                   <div className="font-bold">{loc.deviceId}</div>
-                  <div className="text-sm">{loc.timestamp}</div>
+                  <div className="text-sm">{new Date(loc.timestamp).toLocaleString("fr-FR")}</div>
                 </div>
               </div>
               {expanded === idx && (
