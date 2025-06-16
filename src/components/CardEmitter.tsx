@@ -6,7 +6,7 @@ export const CardEmitter = () => {
   const [username, setUsername] = useState("");
   const [sent, setSent] = useState(false);
 
-  const { start, stop } = useSendLocation(username, 5);
+  const { start, stop, error } = useSendLocation(username, 5);
 
   const handleStart = () => {
     if (username.trim()) {
@@ -51,6 +51,7 @@ export const CardEmitter = () => {
               Arrêter
             </button>
           )}
+          {error && <p className="text-red-500 mt-4">{error}</p>}
         </div>
       </section>
       

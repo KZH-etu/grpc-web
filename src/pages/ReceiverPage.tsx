@@ -21,7 +21,7 @@ export const ReceiverPage = () => {
         <div className="flex flex-col justify-center">
           <p className="font-semibold text-lg mb-4 text-center">RECEIVER</p>
           <button
-            className="bg-blue-500 text-white px-4 py-2 rounded mb-6 disabled:opacity-50"
+            className="bg-blue-500 text-white px-4 py-2 rounded mb-6 disabled:opacity-50 disabled:bg-gray-300"
             onClick={handleGetLocations}
             disabled={loading}
           >

@@ -1,8 +1,9 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 
 export function useSendLocation(deviceId: string, intervalSec = 10) {
   const intervalRef = useRef<number | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const send = useCallback(async () => {
     try {
@@ -20,9 +21,15 @@ export function useSendLocation(deviceId: string, intervalSec = 10) {
       };
 
       console.log(payload);
-      await axios.post('http://localhost:3000/locations', payload);
+      await axios.post('http://192.168.1.173:3000/locations', payload);
       console.log('Position envoyée');
-    } catch (err) {
+      setError(null);
+    } catch (err: any) {
+      if (err.response?.status === 409) {
+        setError('Le nom du device existe déjà.');
+      } else {
+        setError('Erreur envoi position.');
+      }
       console.error('Erreur envoi position:', err);
     }
   }, [deviceId]);
@@ -41,5 +48,5 @@ export function useSendLocation(deviceId: string, intervalSec = 10) {
     }
   }, []);
 
-  return { stop, start };
+  return { stop, start, error };
 }

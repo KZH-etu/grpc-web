@@ -19,7 +19,7 @@ export function useGetLocations() {
   const fetchLocations = async () => {
     setLoading(true);
     try {
-      const res = await axios.get('http://localhost:3000/locations');
+      const res = await axios.get('http://192.168.1.173:3000/locations');
       setLocations(res.data.locations);
     } catch (err) {
       console.error('Erreur récupération positions:', err);
