@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import axios from 'axios';
 
 export function useSendLocation(deviceId: string, intervalSec = 10) {

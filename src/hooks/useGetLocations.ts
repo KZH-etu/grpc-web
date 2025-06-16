@@ -8,10 +8,6 @@ interface LocationMessage {
   timestamp: string;
 }
 
-interface Response{
-  locations: LocationMessage[]
-}
-
 export function useGetLocations() {
   const [locations, setLocations] = useState<LocationMessage[]>();
   const [loading, setLoading] = useState(false);
