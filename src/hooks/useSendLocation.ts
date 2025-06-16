@@ -21,7 +21,7 @@ export function useSendLocation(deviceId: string, intervalSec = 10) {
       };
 
       console.log(payload);
-      await axios.post('http://192.168.1.173:3000/locations', payload);
+      await axios.post('https://grpc-server-fliz.onrender.com/locations', payload);
       console.log('Position envoyée');
       setError(null);
     } catch (err: any) {
