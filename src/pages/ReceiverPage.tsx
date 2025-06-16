@@ -29,7 +29,7 @@ export const ReceiverPage = () => {
 
   return (
     <div className="h-screen w-screen bg-gray-300 flex flex-col items-center">
-      <section className="bg-white p-5 rounded-xl shadow-xl min-w-[350px] mt-10">
+      <section className="bg-white p-5 rounded-xl shadow-xl min-w-[500px] mt-10">
         <div className="flex flex-col justify-center">
           <p className="font-semibold text-lg mb-4 text-center">RECEIVER</p>
           <button
